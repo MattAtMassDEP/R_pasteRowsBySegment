@@ -2,7 +2,7 @@
 
 This Script will paste a number of rows from one column using another column as a groupby field.  
 
-If will take a data frame like below and concatenate the Final.Text values by Segment.
+It will take a data frame like below and concatenate the Final.Text values by Segment.
 
 ######   Segment    Final.Text        randomValues
 ###### 1 MA21-01   W1572 (2007)           43
