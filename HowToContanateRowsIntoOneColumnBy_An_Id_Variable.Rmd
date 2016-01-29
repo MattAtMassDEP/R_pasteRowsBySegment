@@ -1,0 +1,64 @@
+---
+title: "Work for Dan"
+author: "Matthew Reardon"
+date: "Friday, January 28, 2016"
+output: html_document
+---
+</br>
+First we will read in the segment information and the sites from Dan's csv.
+</br>
+```{r}
+#bring in dan's segs and stations
+dan_work<-read.csv('C:\\Users\\MReardon\\Desktop\\dan_Seg_Work.csv')
+```
+
+Load the neccessary libraries and the fnList function from user 42 from stackoverflow. The fnlist function outputs a list to file while keeping the names of a list.
+</br>
+
+```{r include=TRUE, cache=FALSE, warning=FALSE, message=FALSE}
+library(dplyr)
+library(knitr)
+library(data.table)
+
+#function from stackoverlow, user "42", http://stackoverflow.com/questions/8261590/write-list-to-a-text-file-preserving-names-r
+fnlist <- function(x, fil){ z <- deparse(substitute(x))
+                         cat(z, "\n", file=fil)
+                         nams=names(x) 
+                   for (i in seq_along(x) ){ cat(nams[i], "\t",  x[[i]], "\n", 
+                                            file=fil, append=TRUE) }
+                         }
+
+```
+
+Arrange by Segment ID.
+</br>
+
+```{r include=TRUE, cache=FALSE}
+dan_work<-arrange(dan_work, Segment)
+```
+Look at the "dan_work" file. Note multiple Final.Text values per segment.  These are the stations on each segment.
+```{r}
+head(dan_work)
+```
+
+Use tapply.  This runs the paste function on the "Final.Text" column (first parameter) and uses the "segment" column as the ID or groupby variable.
+</br>
+
+```{r include=TRUE, cache=FALSE}
+a<-tapply(dan_work$Final.Text, dan_work$Segment, function (x) paste(x))
+```
+Look at the list that is output.  We need to put the list with its names into a text file.
+```{r include=TRUE, cache=FALSE}
+head(a)
+```
+
+Finally using fnlist function, output to text file.
+```{r include=TRUE, cache=FALSE}
+fnlist(a, "C:\\Users\\MReardon\\Desktop\\test.txt")
+```
+
+Fin.
+
+
+
+
