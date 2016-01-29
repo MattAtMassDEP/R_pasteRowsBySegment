@@ -1,4 +1,4 @@
-﻿# R_pasteRowsBySegment
+### R_pasteRowsBySegment
 
 This Script will paste a number of rows from one column using another column as a groupby field.  
 
